@@ -72,11 +72,11 @@
             <h2>snapdeal</h2>
             <input type="text" placeholder="Search products & brands" id="input">
             <button>🔍  Search</button>
-            <div id="cart"><a href="home.html">Home</a></div>
-            <div id="cart"><a href="Cart.html">Cart</a></div>
-            <div id="cart"><a href="Order.html">Order</a></div>
-            <div id="cart"><a href="Signup.html">Sigup</a></div>
-            <div id="cart"><a href="Signin.html">Sigin</a></div>
+            <div id="cart"><a href="./home.html">Home</a></div>
+            <div id="cart"><a href="./Cart.html">Cart</a></div>
+            <div id="cart"><a href="./Order.html">Order</a></div>
+            <div id="cart"><a href="./Signup.html">Sigup</a></div>
+            <div id="cart"><a href="./Signin.html">Sigin</a></div>
         </div>
         <div id="signin">
             <h1 id="heading">Please Enter Your Details</h1>
@@ -93,17 +93,18 @@
     let data=JSON.parse(localStorage.getItem("account-data"));
     let form=document.querySelector("form");
     form.addEventListener("submit",signin)
-    function signin(ele){
-      ele.preventDefault();
+    function signin(){
+      event.preventDefault();
       let head=document.getElementById("heading");
-      let email=document.getElementById("email");
-      let password=document.getElementById("password");
+      let email=document.getElementById("email").value;
+      let password=document.getElementById("password").value;
       function signin(data){
         data.forEach((el,i)=>{
           if(el.email==email && el.password==password){
-            console.log("sign in Successful");
+            alert("sign in Successful");
+            window.location.href="./home.html"
           }else{
-            console.log("Wrong Credentials");
+            alert("Incorrect Data");
           }
         });
       }
