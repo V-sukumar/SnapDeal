@@ -78,6 +78,9 @@
             width: 100%;
             height: 300px;
         }
+        .parent>.card>button{
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -114,6 +117,7 @@
     .catch((err)=>{
         console.log(err);
     })
+    let order=JSON.parse(localStorage.getItem("cart"))||[]
     function display(data){
         parent.innerHTML="";
         data.forEach((ele,ind)=>{
@@ -127,9 +131,28 @@
             desc.innerText=ele.description;
             let price=document.createElement("h4");
             price.innerText=`₹${ele.price}`;
-            card.append(image,title,desc,price)
+            let cart=document.createElement("button");
+            cart.innerText="Add to Cart"
+            cart.addEventListener("click",()=>{
+                if(checkduplicate(ele)){
+                    alert("Already In Cart")
+                }else{
+                    order.push(ele)
+                    localStorage.setItem("cart",JSON.stringify(order))
+                    alert("Added to Cart")
+                }
+            })
+            card.append(image,title,desc,price,cart)
             parent.append(card)
         })
     }
+    function checkduplicate(ele){
+    for(let i=0;i<order.length;i++){
+      if(order[i].id==ele.id){
+        return true;
+      }
+    }
+    return false;
+   }
 </script>
 </html>
