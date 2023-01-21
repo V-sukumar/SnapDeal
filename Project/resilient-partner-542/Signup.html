@@ -62,8 +62,23 @@
         a:any-link{
             color: white;
         }
-        #signup{
+        .cont>h1{
             text-align: center;
+        }
+        #signup{
+            border: 1px solid white;
+            margin: auto;
+            width: 400px;
+            height: 280px;
+            text-align: center;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        }
+        form{
+            margin-top: 35px;
+        }
+        #signup #name,#email,#password{
+            width: 300px;
+            height: 40px;
         }
   </style>
 </head>
@@ -76,13 +91,12 @@
             <input type="text" placeholder="Search products & brands" id="input">
             <button>🔍  Search</button>
             <div id="cart"><a href="./home.html">Home</a></div>
-            <div id="cart"><a href="./Cart.html">Cart</a></div>
-            <div id="cart"><a href="./Order.html">Order</a></div>
             <div id="cart"><a href="./Signup.html">Sigup</a></div>
             <div id="cart"><a href="./Signin.html">Sigin</a></div>
         </div>
+        <h1>Please Enter Your Details</h1>
         <div id="signup">
-            <h1>Please Enter Your Details</h1>
+            
             <form>
               <div><input type="text" placeholder="Enter your Name" id="name"></div><br>
               <div><input type="email" placeholder="Enter your Email" id="email"></div><br>
