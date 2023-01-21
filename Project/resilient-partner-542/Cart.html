@@ -80,7 +80,28 @@
             height: 300px;
         }
         .parent>.card>button{
+            border: none;
+            width: 100px;
+            height: 30px;
+            font-size: 15px;
             margin-bottom: 20px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+        .parent>.card>.buy{
+            border: none;
+            width: 80px;
+            height: 30px;
+            font-size: 15px;
+            margin-left: 40px;
+            border-radius: 5px;
+        }
+        #total{
+            border-radius: 10px;
+            text-align: center;
+            margin: auto;
+            margin-top: 10px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
     </style>
 </head>
@@ -94,15 +115,18 @@
             <div id="cart"><a href="./home.html">Home</a></div>
             <div id="cart"><a href="./Cart.html">Cart</a></div>
             <div id="cart"><a href="./Order.html">Order</a></div>
-            <div id="cart"><a href="./Signup.html">Sigup</a></div>
-            <div id="cart"><a href="./Signin.html">Sigin</a></div>
         </div>
+        <h1 id="total">
+            Your total Cart value is :- <span id="order-total">0</span>
+        </h1>
         <div class="parent"></div>
     </div>
     
 </body>
 <script>
     let data=JSON.parse(localStorage.getItem("cart"))||[]
+    let orders=JSON.parse(localStorage.getItem("order"))||[]
+    let total=document.getElementById("order-total");
     let cont=document.querySelector(".parent");
     display(data)
     function display(data){
@@ -127,11 +151,55 @@
                 localStorage.setItem("cart",JSON.stringify(data))
                 display(data)
             })
-            card.append(image,title,desc,price,del)
+            let Buy=document.createElement("button")
+            Buy.setAttribute("class","buy")
+            Buy.innerText="Buy";
+            Buy.style.backgroundColor="#2bb6f6"
+            Buy.style.color="white";
+            Buy.addEventListener("click",()=>{
+                if(checkorder(ele)){
+                    alert("Already in order")
+                }else{
+                    orders.push({...ele,Qty:1})
+                    localStorage.setItem("order",JSON.stringify(orders))
+                    alert("Added to order")
+                }
+            })
+            let Qty=document.createElement("span");
+            Qty.innerText=ele.Qty;
+            let increment=document.createElement("button");
+            increment.innerText="+";
+            let decrement=document.createElement("button");
+            decrement.innerText="-";
+            increment.addEventListener("click",()=>{
+                ele=ele.Qty++
+                localStorage.setItem("cart",JSON.stringify(data))
+                display(data)
+            })
+            decrement.addEventListener("click",()=>{
+                if(ele.Qty>1){
+                    ele=ele.Qty--
+                    localStorage.setItem("cart",JSON.stringify(data))
+                    display(data)
+                }
+            })
+            card.append(image,title,desc,price,increment,Qty,decrement,del,Buy)
             cont.append(card)
         })
+        let sum=0;
+        for(let i=0;i<data.length;i++){
+            sum+=data[i].price*data[i].Qty
+        }
+        total.innerText=Math.ceil(sum);
         
     }
-    
+    function checkorder(ele){
+        for(let i=0;i<orders.length;i++){
+            if(orders[i].id==ele.id){
+                return true;
+            }
+        }
+        return false;
+   }
 </script>
 </html>

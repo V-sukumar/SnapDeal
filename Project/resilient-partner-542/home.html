@@ -79,7 +79,21 @@
             height: 300px;
         }
         .parent>.card>button{
+            border: none;
+            width: 100px;
+            height: 30px;
+            font-size: 15px;
             margin-bottom: 20px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+        .parent>.card>.buy{
+            border: none;
+            width: 80px;
+            height: 30px;
+            font-size: 15px;
+            margin-left: 40px;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -118,6 +132,7 @@
         console.log(err);
     })
     let order=JSON.parse(localStorage.getItem("cart"))||[]
+    let orders=JSON.parse(localStorage.getItem("order"))||[]
     function display(data){
         parent.innerHTML="";
         data.forEach((ele,ind)=>{
@@ -137,18 +152,40 @@
                 if(checkduplicate(ele)){
                     alert("Already In Cart")
                 }else{
-                    order.push(ele)
+                    order.push({...ele,Qty:1})
                     localStorage.setItem("cart",JSON.stringify(order))
                     alert("Added to Cart")
                 }
             })
-            card.append(image,title,desc,price,cart)
+            let Buy=document.createElement("button")
+            Buy.setAttribute("class","buy")
+            Buy.innerText="Buy";
+            Buy.style.backgroundColor="#2bb6f6"
+            Buy.style.color="white";
+            Buy.addEventListener("click",()=>{
+                if(checkorder(ele)){
+                    alert("Already in order")
+                }else{
+                    orders.push({...ele,Qty:1})
+                    localStorage.setItem("order",JSON.stringify(orders))
+                    alert("Added to order")
+                }
+            })
+            card.append(image,title,desc,price,cart,Buy)
             parent.append(card)
         })
     }
     function checkduplicate(ele){
     for(let i=0;i<order.length;i++){
       if(order[i].id==ele.id){
+        return true;
+      }
+    }
+    return false;
+   }
+   function checkorder(ele){
+    for(let i=0;i<orders.length;i++){
+      if(orders[i].id==ele.id){
         return true;
       }
     }
