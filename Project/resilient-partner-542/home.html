@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,12 +12,12 @@
             margin: auto;
         }
         .nav{
-            border: 1px solid black;
             width: 100%;
             display: flex;
             justify-content: space-around;
             text-align: center;
             background-color: #c6003d;
+            
         }
         .nav>h2{
             margin-left: 10px;
@@ -55,45 +56,88 @@
             padding-top: 25px;
             margin-right: 50px;
             font-size: 20px;
+            
         }
         a:any-link{
             color: white;
+            text-decoration: none;
         }
-        .parent{
+        #sub{
+            border: 1px solid white;
+            display: flex;
             width: 90%;
             margin: auto;
-            display: grid;
-            grid-template-columns: repeat(4,1fr);
-            gap: 10px;
-            justify-content: center;
-        }
-        .parent>.card{
-            /* border: 1px solid red; */
-            width: 100%;
-            text-align: center;
-            margin-top: 20px;
+            margin-top: 10px;
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
-        .parent>.card>img{
-            width: 100%;
-            height: 300px;
+        #sub>#left{
+            border: 1px solid white;
+            width: 300px;
+            color: #7f7f7f;
+            /* margin-left: 10px; */
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
-        .parent>.card>button{
-            border: none;
+        #sub>#left>div>img{
+            margin-top: 10px;
+            border: 1px solid white;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        #sub>#right{
+            /* border: 1px solid black; */
+            display: grid;
+            grid-template-columns: repeat(4,250px);
+            gap: 10px;
+            margin-left: 10px;
+            
+        }
+        #sub>#right>div{
+            border: 1px solid white;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            text-align: center;
+        }
+        #sub>#right>div>img{
+            width: 200px;
+        }
+        #sub2{
+            width: 90%;
+            border: 1px solid white;
+            margin: auto;
+            display: flex;
+            margin-top: 10px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        #sub2>#img1{
+            margin-left: 50px;
+        }
+        #sub2>#img2{
+            /* border: 1px solid black; */
+            margin-left: 200px;
+            text-align: justify;
+            align-items: center;
+            margin-top: 50px;
+        }
+        #img2>#img3{
+            height: 50px;
+        }
+        #sub3{
+            /* border: 1px solid black; */
+            width: 100%;
+            display: flex;
+            margin-top: 10px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        #sub3>div{
+            margin-left: 80px;
+        }
+        #sub3>div>form>#btn{
             width: 100px;
             height: 30px;
-            font-size: 15px;
-            margin-bottom: 20px;
-            margin-right: 10px;
-            border-radius: 5px;
+            background-color: black;
+            color: white;
         }
-        .parent>.card>.buy{
-            border: none;
-            width: 80px;
+        #sub3>div>form>#int{
+            width: 200px;
             height: 30px;
-            font-size: 15px;
-            margin-left: 40px;
-            border-radius: 5px;
         }
     </style>
 </head>
@@ -103,93 +147,147 @@
             <img src="./snap deal.png" alt="err">
             <h2>snapdeal</h2>
             <input type="text" placeholder="Search products & brands" id="input">
-            <button>🔍  Search</button>
+            <button id="btn">🔍  Search</button>
             <div id="cart"><a href="./home.html">Home</a></div>
+            <div id="cart"><a href="./dash.html">Dashboard</a></div>
             <div id="cart"><a href="./Cart.html">Cart</a></div>
             <div id="cart"><a href="./Order.html">Order</a></div>
             <div id="cart"><a href="./Signup.html">Sigup</a></div>
-            <div id="cart"><a href="./Signin.html">Sigin</a></div>
+            <div id="cart"><a href="./Signin.html">Sigin</a></div> 
         </div>
-        <div class="parent"></div>
+        <div id="sub">
+            <div id="left">
+                <h4>TOP CATEGORIES</h4>
+                <h4>Men's Fashion</h4>
+                <h4>Women's Fashion</h4>
+                <h4>Home & Kitchen</h4>
+                <h4>Toys, Kids' Fashion & m..</h4>
+                <h4>Beauty, Health & Daily N..</h4>
+                <h4>MORE CATEGORIES</h4>
+                <h4>Automotives</h4>
+                <h4>Mobile & Accessories</h4>
+                <h4>Electronics</h4>
+                <h4>Sports, Fitness & Outdoor</h4>
+                <h4>Computers & Gaming</h4>
+                <h4>Books, Media & Music</h4>
+                <h4>Hobbies</h4>
+                <h4>TRENDING SEARCHES</h4>
+                <h4>🔍Kitchen Products</h4>
+                <h4>🔍Shoes for Men</h4>
+                <h4>🔍Kurti Set</h4>
+                <h4>🔍Sandal Men</h4>
+                <h4>🔍Sport shoe Men</h4>
+                <div>
+                    <img src="./logo 2.png" alt="err">
+                </div>
+            </div>
+            <div id="right">
+                <div>
+                    <img src="https://n1.sdlcdn.com/imgs/i/n/r/bhawna-collection-Loard-Shiv-Trishul-SDL890408077-1-86933.jpeg" alt="err">
+                    <p>Bhawna Collection Loard Shiv Trishul Damru Locket With Puchmukhi Rudraksha Mala Gold-plated Brass, Wood For Men & Women</p>
+                    <h4>Rs. 159</h4>
+                    <button>77% OFF</button>
+                </div>
+                <div>
+                    <img src="https://n2.sdlcdn.com/imgs/k/e/u/Veirdo-100-Cotton-Regular-Fit-SDL302182620-1-f0fac.jpg" alt="err">
+                    <p>Veirdo - Green Cotton Regular Fit Men's T-Shirt ( Pack of 1 )
+                    </p>
+                    <h4>Rs. 329</h4>
+                    <button>73% OFF</button>
+                </div>
+                <div>
+                    <img src="https://n3.sdlcdn.com/imgs/i/u/v/HeelSocks1-aeb5a.jpg" alt="err">
+                    <p>Stay Healthy - Foot Protector (Free Size)</p>
+                    <h4>Rs. 110</h4>
+                    <button>78% OFF</button>
+                </div>
+                <div>
+                    <img src="https://n2.sdlcdn.com/imgs/k/i/b/Quarantine-Black-Cotton-Blend-Men-SDL097004046-1-5d986.jpg" alt="err">
+                    <p>Quarantine - Black Cotton Blend Men's Boxer ( Pack of 1 )</p>
+                    <h4>Rs. 229</h4>
+                    <button>71% OFF</button>
+                </div>
+                <div>
+                    <img src="https://n2.sdlcdn.com/imgs/i/z/e/Maxbell-USB-Rechargeable-Electronic-Flameless-SDL679184483-1-08e0f.jpg" alt="err">
+                    <p>Maxbell USB Rechargeable Electronic Flameless Lighter</p>
+                    <h4>Rs. 173</h4>
+                    <button>57% OFF</button>
+                </div>
+                <div>
+                    <img src="https://n1.sdlcdn.com/imgs/i/z/e/Bentag-Vegetable-Fruit-Clever-Cutter-SDL841893040-1-ea5e3.jpg" alt="err">
+                    <p>Bentag kitchenware Vegetable & Fruit Clever Cutter Stainless Steel Vegetable Scissor</p>
+                    <h4>Rs. 135 </h4>
+                    <button>67% OFF</button>
+                </div>
+                <div>
+                    <img src="https://n1.sdlcdn.com/imgs/k/e/u/Veirdo-100-Cotton-Regular-Fit-SDL051246309-1-51a91.jpg" alt="err">
+                    <p>Veirdo - Multicolor Cotton Regular Fit Men's T-Shirt ( Pack of 1 )</p>
+                    <h4>Rs. 339</h4>
+                    <button>72% OFF</button>
+                </div>
+                <div>
+                    <img src="https://n4.sdlcdn.com/imgs/h/j/e/Battlestar-Tummy-Trimmer-Double-String-SDL774194847-1-45168.jpeg" alt="err">
+                    <p>Battlestar Tummy Trimmer Double String Abdominal Exercise- Black</p>
+                    <h4>Rs. 269</h4>
+                    <button>78% OFF</button>
+                </div>     
+            </div>
+        </div>
+        <div id="sub2">
+            <div id="img1">
+                <img src="./logo.png" alt="err">
+            </div>
+            <div id="img2">
+                <h1>Download Snapdeal</h1>
+                <h1>App Now</h1>
+                <p>Fast, Simple & Delightful.</p>
+                <p>All it takes is 30 seconds to Download.</p>
+                <div id="img3">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpcerr2SWYq1l2OXV-OpH_CFRYP3FLZ9ypRg&usqp=CAU" alt="err">
+                </div>
+                
+            </div>
+        </div>
+        <div id="sub3">
+            <div>
+                <h3>POLICY INFO</h3>
+                <p>Privacy Policy</p>
+                <p>Terms of Sale</p>
+                <p>Terms of Use</p>
+                <p>Report Abuse & Takedown Policy</p>
+                <p>FAQ</p>
+            </div>
+            <div>
+                <h3>COMPANY</h3>
+                <p>Impact@Snapdeal</p>
+                <p>Careers</p>
+                <p>Blog</p>
+                <p>Sitemap</p>
+                <p>Contact Us</p>
+            </div>
+            <div>
+                <h3>SNAPDEAL BUSINESS</h3>
+                <p>Shopping App</p>
+                <p>Sell on Snapdeal</p>
+                <p>Media Enquiries</p>
+            </div>
+            <div>
+                <h3>POPULAR LINKS</h3>
+                <p>Lehenga</p>
+                <p>Kid's Clothing</p>
+                <p>Sarees</p>
+                <p>Winter Wear</p>
+            </div>
+            <div>
+                <h3>SUBSCRIBE</h3>
+                <form>
+                    <input type="text" id="int" placeholder="Your Email Address">
+                    <input type="Submit" id="btn" value="SUBSCRIBE">
+                </form>
+                <p>Register now to get updates on promotions and</p>
+                <p>coupons. Or Download App</p>
+            </div>
+        </div>  
     </div>
-    
 </body>
-<script>
-    let parent=document.querySelector(".parent");
-    let data=[]
-    const Api="https://fakestoreapi.com/products";
-    fetch(Api)
-    .then((request)=>{
-        return request.json();
-    })
-    .then((ele)=>{
-        data=ele;
-        console.log(ele);
-        
-        display(data)
-    })
-    .catch((err)=>{
-        console.log(err);
-    })
-    let order=JSON.parse(localStorage.getItem("cart"))||[]
-    let orders=JSON.parse(localStorage.getItem("order"))||[]
-    function display(data){
-        parent.innerHTML="";
-        data.forEach((ele,ind)=>{
-            let card=document.createElement("div");
-            card.setAttribute("class","card")
-            let image=document.createElement("img");
-            image.setAttribute("src",ele.image)
-            let title=document.createElement("h2");
-            title.innerText=ele.title;
-            let desc=document.createElement("p");
-            desc.innerText=ele.description;
-            let price=document.createElement("h4");
-            price.innerText=`₹${ele.price}`;
-            let cart=document.createElement("button");
-            cart.innerText="Add to Cart"
-            cart.addEventListener("click",()=>{
-                if(checkduplicate(ele)){
-                    alert("Already In Cart")
-                }else{
-                    order.push({...ele,Qty:1})
-                    localStorage.setItem("cart",JSON.stringify(order))
-                    alert("Added to Cart")
-                }
-            })
-            let Buy=document.createElement("button")
-            Buy.setAttribute("class","buy")
-            Buy.innerText="Buy";
-            Buy.style.backgroundColor="#2bb6f6"
-            Buy.style.color="white";
-            Buy.addEventListener("click",()=>{
-                if(checkorder(ele)){
-                    alert("Already in order")
-                }else{
-                    orders.push({...ele,Qty:1})
-                    localStorage.setItem("order",JSON.stringify(orders))
-                    alert("Added to order")
-                }
-            })
-            card.append(image,title,desc,price,cart,Buy)
-            parent.append(card)
-        })
-    }
-    function checkduplicate(ele){
-    for(let i=0;i<order.length;i++){
-      if(order[i].id==ele.id){
-        return true;
-      }
-    }
-    return false;
-   }
-   function checkorder(ele){
-    for(let i=0;i<orders.length;i++){
-      if(orders[i].id==ele.id){
-        return true;
-      }
-    }
-    return false;
-   }
-</script>
 </html>

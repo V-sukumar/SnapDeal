@@ -11,13 +11,11 @@
             margin: auto;
         }
         .nav{
-            border: 1px solid black;
             width: 100%;
             display: flex;
             justify-content: space-around;
             text-align: center;
             background-color: #c6003d;
-            
         }
         .nav>h2{
             margin-left: 10px;
@@ -56,9 +54,11 @@
             padding-top: 25px;
             margin-right: 50px;
             font-size: 20px;
+            
         }
         a:any-link{
             color: white;
+            text-decoration: none;
         }
         .parent{
             width: 90%;
@@ -96,13 +96,6 @@
             margin-left: 40px;
             border-radius: 5px;
         }
-        #total{
-            border-radius: 10px;
-            text-align: center;
-            margin: auto;
-            margin-top: 10px;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        }
     </style>
 </head>
 <body>
@@ -111,26 +104,55 @@
             <img src="./snap deal.png" alt="err">
             <h2>snapdeal</h2>
             <input type="text" placeholder="Search products & brands" id="input">
-            <button>🔍  Search</button>
+            <button id="btn">🔍  Search</button>
             <div id="cart"><a href="./home.html">Home</a></div>
             <div id="cart"><a href="./Cart.html">Cart</a></div>
             <div id="cart"><a href="./Order.html">Order</a></div>
+            <!-- <div id="cart"><a href="./Signup.html">Sigup</a></div>
+            <div id="cart"><a href="./Signin.html">Sigin</a></div> -->
         </div>
-        <h1 id="total">
-            Your total Cart value is :- <span id="order-total">0</span>
-        </h1>
         <div class="parent"></div>
     </div>
     
 </body>
 <script>
-    let data=JSON.parse(localStorage.getItem("cart"))||[]
+    let parent=document.querySelector(".parent");
+    let data=[]
+    const Api="https://fakestoreapi.com/products";
+    let search=document.getElementById("input");
+    let btn=document.getElementById("btn")
+    btn.addEventListener("click",()=>{
+        event.preventDefault();
+        let searchParams = search.value;
+        let filtered = data.filter((element) => {
+            if (
+            element.title.toUpperCase().includes(searchParams.toUpperCase()) ===
+            true
+            ) {
+            return true;
+            } else {
+            return false;
+            }
+        });
+        display(filtered);
+    })
+    fetch(Api)
+    .then((request)=>{
+        return request.json();
+    })
+    .then((ele)=>{
+        data=ele;
+        console.log(ele);
+        
+        display(data)
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+    let order=JSON.parse(localStorage.getItem("cart"))||[]
     let orders=JSON.parse(localStorage.getItem("order"))||[]
-    let total=document.getElementById("order-total");
-    let cont=document.querySelector(".parent");
-    display(data)
     function display(data){
-        cont.innerHTML="";
+        parent.innerHTML="";
         data.forEach((ele,ind)=>{
             let card=document.createElement("div");
             card.setAttribute("class","card")
@@ -142,14 +164,16 @@
             desc.innerText=ele.description;
             let price=document.createElement("h4");
             price.innerText=`₹${ele.price}`;
-            let del=document.createElement("button");
-            del.innerText="Remove";
-            del.addEventListener("click",()=>{
-                data=data.filter((el)=>{
-                    return el.id!==ele.id
-                })
-                localStorage.setItem("cart",JSON.stringify(data))
-                display(data)
+            let cart=document.createElement("button");
+            cart.innerText="Add to Cart"
+            cart.addEventListener("click",()=>{
+                if(checkduplicate(ele)){
+                    alert("Already In Cart")
+                }else{
+                    order.push({...ele,Qty:1})
+                    localStorage.setItem("cart",JSON.stringify(order))
+                    alert("Added to Cart")
+                }
             })
             let Buy=document.createElement("button")
             Buy.setAttribute("class","buy")
@@ -165,41 +189,25 @@
                     alert("Added to order")
                 }
             })
-            let Qty=document.createElement("span");
-            Qty.innerText=ele.Qty;
-            let increment=document.createElement("button");
-            increment.innerText="+";
-            let decrement=document.createElement("button");
-            decrement.innerText="-";
-            increment.addEventListener("click",()=>{
-                ele=ele.Qty++
-                localStorage.setItem("cart",JSON.stringify(data))
-                display(data)
-            })
-            decrement.addEventListener("click",()=>{
-                if(ele.Qty>1){
-                    ele=ele.Qty--
-                    localStorage.setItem("cart",JSON.stringify(data))
-                    display(data)
-                }
-            })
-            card.append(image,title,desc,price,increment,Qty,decrement,del,Buy)
-            cont.append(card)
+            card.append(image,title,desc,price,cart,Buy)
+            parent.append(card)
         })
-        let sum=0;
-        for(let i=0;i<data.length;i++){
-            sum+=data[i].price*data[i].Qty
-        }
-        total.innerText=Math.ceil(sum);
-        
     }
-    function checkorder(ele){
-        for(let i=0;i<orders.length;i++){
-            if(orders[i].id==ele.id){
-                return true;
-            }
-        }
-        return false;
+    function checkduplicate(ele){
+    for(let i=0;i<order.length;i++){
+      if(order[i].id==ele.id){
+        return true;
+      }
+    }
+    return false;
+   }
+   function checkorder(ele){
+    for(let i=0;i<orders.length;i++){
+      if(orders[i].id==ele.id){
+        return true;
+      }
+    }
+    return false;
    }
 </script>
 </html>
