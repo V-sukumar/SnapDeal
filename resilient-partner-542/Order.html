@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapDeal</title>
+    <style>
+        .cont{
+            width: 100%;
+            margin: auto;
+        }
+        .nav{
+            border: 1px solid black;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            background-color: #c6003d;
+            
+        }
+        .nav>h2{
+            margin-left: 10px;
+            margin: auto;
+            font-size: 30px;
+            color: white;
+        }
+        .nav>#input{
+            border: none;
+            width: 700px;
+            height: 50px;
+            margin: auto;
+            margin-left: 200px;
+            padding-left: 20px;
+        }
+        .nav>button{
+            border: none;
+            width: 200px;
+            height: 55px;
+            margin: auto;
+            margin-right: 50px;
+            background-color: #333333;
+            color: white;
+        }
+        .nav>img{
+            width: 40px;
+            padding-top: 5px;
+            height: 30px;
+            margin: auto;
+            margin-left: 100px;
+        }
+        .nav>#cart{
+            width: 100px;
+            height: 50px;
+            margin: auto;
+            padding-top: 25px;
+            margin-right: 50px;
+            font-size: 20px;
+        }
+        a:any-link{
+            color: white;
+        }
+        .parent{
+            width: 90%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 10px;
+            justify-content: center;
+        }
+        .parent>.card{
+            /* border: 1px solid red; */
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        .parent>.card>img{
+            width: 100%;
+            height: 300px;
+        }
+        .parent>.card>button{
+            border: none;
+            width: 130px;
+            height: 30px;
+            font-size: 15px;
+            margin-bottom: 20px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+        .parent>.card>.cnfrm{
+            border: none;
+            width: 130px;
+            height: 30px;
+            font-size: 15px;
+            margin-left: 30px;
+            border-radius: 5px;
+        }
+        #total{
+            border-radius: 10px;
+            text-align: center;
+            margin: auto;
+            margin-top: 10px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cont">
+        <div class="nav">
+            <img src="./snap deal.png" alt="err">
+            <h2>snapdeal</h2>
+            <input type="text" placeholder="Search products & brands" id="input">
+            <button>🔍  Search</button>
+            <div id="cart"><a href="./home.html">Home</a></div>
+            <div id="cart"><a href="./Cart.html">Cart</a></div>
+            <div id="cart"><a href="./Order.html">Order</a></div>
+        </div>
+        <h1 id="total">
+            Your total order value is :- <span id="order-total">0</span>
+        </h1>
+        <div class="parent"></div>
+    </div>
+    
+</body>
+<script>
+    let data=JSON.parse(localStorage.getItem("order"))||[];
+    let parent=document.querySelector(".parent")
+    let total=document.getElementById("order-total");
+    let orders=[]
+    display(data)
+    function display(data){
+        parent.innerHTML="";
+        data.forEach((ele,ind)=>{
+            let card=document.createElement("div");
+            card.setAttribute("class","card")
+            let image=document.createElement("img");
+            image.setAttribute("src",ele.image)
+            let title=document.createElement("h2");
+            title.innerText=ele.title;
+            let desc=document.createElement("p");
+            desc.innerText=ele.description;
+            let price=document.createElement("h4");
+            price.innerText=`₹${ele.price}`;
+            let cancel=document.createElement("button");
+            cancel.innerText="Cancel Order";
+            cancel.addEventListener("click",()=>{
+                alert('Order cancelled')
+            })
+            let cnfrm=document.createElement("button");
+            cnfrm.setAttribute("class","cnfrm")
+            cnfrm.innerText="Place Your Order";
+            cnfrm.style.backgroundColor="green"
+            cnfrm.style.color="white"
+            cnfrm.addEventListener("click",()=>{
+                orders.push(ele)
+                localStorage.setItem("order",JSON.stringify(orders))
+                alert("Order Placed")
+            })
+            let del=document.createElement("button");
+            del.innerText="Remove";
+            del.addEventListener("click",()=>{
+                data=data.filter((el)=>{
+                    return el.id!==ele.id
+                })
+                localStorage.setItem("order",JSON.stringify(data))
+                display(data)
+            })
+            let Qty=document.createElement("span");
+            Qty.innerText=ele.Qty;
+            let increment=document.createElement("button");
+            increment.innerText="+";
+            let decrement=document.createElement("button");
+            decrement.innerText="-";
+            increment.addEventListener("click",()=>{
+                ele=ele.Qty++
+                localStorage.setItem("cart",JSON.stringify(data))
+                display(data)
+            })
+            decrement.addEventListener("click",()=>{
+                if(ele.Qty>1){
+                    ele=ele.Qty--
+                    localStorage.setItem("cart",JSON.stringify(data))
+                    display(data)
+                }
+            })
+            card.append(image,title,desc,price,increment,Qty,decrement,cancel,cnfrm,del)
+            parent.append(card)
+        })
+        let sum=0;
+        for(let i=0;i<data.length;i++){
+            sum+=data[i].price*data[i].Qty
+        }
+        total.innerText=Math.ceil(sum);
+        
+    }
+</script>
+</html>

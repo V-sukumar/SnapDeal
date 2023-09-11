@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in Page</title>
+    <style>
+        .cont{
+            width: 100%;
+            margin: auto;
+        }
+        .nav{
+            border: 1px solid black;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            background-color: #c6003d;
+            
+        }
+        .nav>h2{
+            margin-left: 10px;
+            margin: auto;
+            font-size: 30px;
+            color: white;
+        }
+        .nav>#input{
+            border: none;
+            width: 700px;
+            height: 50px;
+            margin: auto;
+            margin-left: 200px;
+            padding-left: 20px;
+        }
+        .nav>button{
+            border: none;
+            width: 200px;
+            height: 55px;
+            margin: auto;
+            margin-right: 50px;
+            background-color: #333333;
+            color: white;
+        }
+        .nav>img{
+            width: 40px;
+            padding-top: 5px;
+            height: 30px;
+            margin: auto;
+            margin-left: 100px;
+        }
+        .nav>#cart{
+            width: 100px;
+            height: 50px;
+            margin: auto;
+            padding-top: 25px;
+            margin-right: 50px;
+            font-size: 20px;
+        }
+        a:any-link{
+            color: white;
+        }
+        .cont>h1{
+            text-align: center;
+        }
+        #signin{
+            border: 1px solid white;
+            margin: auto;
+            width: 400px;
+            height: 200px;
+            text-align: center;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        }
+        form{
+            margin-top: 25px;
+        }
+        #signin #email,#password{
+            width: 300px;
+            height: 40px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="cont">
+        <div class="nav">
+            <img src="./snap deal.png" alt="err">
+            <h2>snapdeal</h2>
+            <input type="text" placeholder="Search products & brands" id="input">
+            <button>🔍  Search</button>
+            <div id="cart"><a href="./home.html">Home</a></div>
+            <div id="cart"><a href="./Signup.html">Sigup</a></div>
+            <div id="cart"><a href="./Signin.html">Sigin</a></div>
+        </div>
+        <h1 id="heading">Please Enter Your Details</h1>
+        <div id="signin">
+           
+            <form>
+              <div><input type="email" placeholder="Enter your Email" id="email" /></div><br>
+              <div><input type="password" placeholder="Enter your Password" id="password" /></div><br>
+              <div><input type="submit" value="Submit" /></div>
+            </form>
+          </div>
+    </div>
+    
+  </body>
+  <script>
+    let data=JSON.parse(localStorage.getItem("account-data"));
+    let form=document.querySelector("form");
+    form.addEventListener("submit",signin)
+    function signin(){
+      event.preventDefault();
+      let head=document.getElementById("heading");
+      let email=document.getElementById("email").value;
+      let password=document.getElementById("password").value;
+      function signin(data){
+        data.forEach((el,i)=>{
+          if(el.email==email && el.password==password){
+            alert("sign in Successful");
+            window.location.href="./home.html"
+          }else{
+            alert("Incorrect Data");
+          }
+        });
+      }
+      signin(data)
+      
+    }
+  </script>
+</html>
